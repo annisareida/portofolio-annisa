@@ -146,7 +146,7 @@ const Home = () => {
         <link rel="canonical" href="https://annisar.com" />
         <meta property="og:title" content="Annisa Reida Raheima — Data Scientist" />
      <meta property="og:description" content="Website resmi dan portofolio Annisa Reida Raheima, Data Scientist." />
-        <meta property="og:url" content="https://ekizr.com" />
+        <meta property="og:url" content="https://annisareida.vercel.app" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">{`
           {
@@ -154,7 +154,7 @@ const Home = () => {
             "@type": "Person",
             "name": "Annisa Reida Raheima",
             "jobTitle": "Data Scientist",
-            "url": "https://ekizr.com",
+            "url": "https://annisareida.vercel.app",
             "sameAs": [
               "https://github.com/annisareida",
               "https://www.linkedin.com/in/annisareida/",
