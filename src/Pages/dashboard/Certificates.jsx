@@ -174,7 +174,7 @@ export default function Certificates() {
           >
             {preview ? (
               // Jika PDF, tampilkan icon dokumen. Jika gambar, tampilkan gambar.
-              file?.type === 'application/pdf' ? (
+              (file?.type === 'application/pdf' || file?.name?.toLowerCase().endsWith('.pdf')) ? (
                 <div className="text-center space-y-2 p-6">
                   <FileText className="w-12 h-12 text-indigo-400 mx-auto" />
                   <p className="text-sm text-gray-300 truncate max-w-[200px]">{file.name}</p>
