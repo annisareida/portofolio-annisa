@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+	import React, { useState } from "react"
 import { Modal, IconButton, Box, Backdrop, Typography } from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
 import FullscreenIcon from "@mui/icons-material/Fullscreen"
@@ -54,7 +54,8 @@ const Certificate = ({ ImgSertif, Link }) => {
 					{/* LOGIKA PREVIEW: Gunakan iframe untuk PDF, img untuk gambar */}
 					{isPdf ? (
 						<iframe
-							src={`${ImgSertif}#toolbar=0&navpanes=0&scrollbar=0`}
+                            /* Tambahkan &view=FitH di akhir URL */
+							src={`${ImgSertif}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
 							title="PDF Preview"
 							className="certificate-media"
 							style={{
@@ -62,7 +63,7 @@ const Certificate = ({ ImgSertif, Link }) => {
 								height: "100%",
 								border: "none",
 								aspectRatio: "16/11.5",
-								pointerEvents: "none", // Sangat penting agar efek klik & hover tetap jalan!
+								pointerEvents: "none",
 								objectFit: "cover",
                                 overflow: "hidden"
 							}}
