@@ -24,14 +24,14 @@ const MainTitle = memo(() => (
       <span className="relative inline-block">
         <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] to-[#a855f7] blur-2xl opacity-20"></span>
         <span className="relative bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-          AI
+          Data
         </span>
       </span>
       <br />
       <span className="relative inline-block mt-2">
         <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] to-[#a855f7] blur-2xl opacity-20"></span>
         <span className="relative bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent">
-          Engineer
+          Scientist
         </span>
       </span>
     </h1>
@@ -143,7 +143,7 @@ const Home = () => {
         <title>Annisa Reida Raheima — Data Scientist</title>
         <meta name="description" content="Website resmi Annisa Reida Raheima, Data Scientist. Saya berfokus pada pengembangan model kecerdasan buatan dan analisis data prediktif untuk merumuskan wawasan (insight) yang akurat dan solusi strategis dalam setiap proyek yang saya kerjakan." />
      <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://annisar.com" />
+        <link rel="canonical" href="https://annisareida.vercel.app" />
         <meta property="og:title" content="Annisa Reida Raheima — Data Scientist" />
      <meta property="og:description" content="Website resmi dan portofolio Annisa Reida Raheima, Data Scientist." />
         <meta property="og:url" content="https://annisareida.vercel.app" />
