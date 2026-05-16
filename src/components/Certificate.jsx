@@ -2,17 +2,15 @@ import React, { useState } from "react"
 import { Modal, IconButton, Box, Backdrop, Typography } from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
 import FullscreenIcon from "@mui/icons-material/Fullscreen"
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf" // Tambahan Ikon PDF
 
 const Certificate = ({ ImgSertif, Link }) => {
 	const [open, setOpen] = useState(false)
 
-	// Cek apakah file adalah PDF berdasarkan URL-nya
+	// Cek apakah file adalah PDF
 	const isPdf = ImgSertif?.toLowerCase().includes('.pdf')
 
 	const handleOpen = () => {
 		if (Link || isPdf) {
-			// Jika PDF atau punya link eksternal, buka di tab baru
 			window.open(Link || ImgSertif, "_blank", "noopener,noreferrer")
 		} else {
 			setOpen(true)
@@ -37,14 +35,13 @@ const Certificate = ({ ImgSertif, Link }) => {
 						boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
 						"& .overlay": { opacity: 1 },
 						"& .hover-content": { transform: "translate(-50%, -50%)", opacity: 1 },
-						"& .certificate-image": { filter: "contrast(1.05) brightness(1) saturate(1.1)" },
+						"& .certificate-media": { filter: "contrast(1.05) brightness(1) saturate(1.1)" },
 					},
 				}}>
 				
 				<Box
 					sx={{
 						position: "relative",
-						bgcolor: isPdf ? "rgba(255,255,255,0.05)" : "transparent",
 						"&::before": {
 							content: '""',
 							position: "absolute",
@@ -54,27 +51,25 @@ const Certificate = ({ ImgSertif, Link }) => {
 						},
 					}}>
 					
-					{/* LOGIKA PENAMPILAN: Jika PDF tampilkan Ikon, jika Gambar tampilkan tag img */}
+					{/* LOGIKA PREVIEW: Gunakan iframe untuk PDF, img untuk gambar */}
 					{isPdf ? (
-						<Box 
-							sx={{ 
-								width: "100%", 
-								aspectRatio: "16/11.5", 
-								display: "flex", 
-								flexDirection: "column",
-								alignItems: "center", 
-								justifyContent: "center",
-								cursor: "pointer",
-								border: "1px solid rgba(255,255,255,0.1)"
+						<iframe
+							src={`${ImgSertif}#toolbar=0&navpanes=0&scrollbar=0`}
+							title="PDF Preview"
+							className="certificate-media"
+							style={{
+								width: "100%",
+								height: "100%",
+								border: "none",
+								aspectRatio: "16/11.5",
+								pointerEvents: "none", // Sangat penting agar efek klik & hover tetap jalan!
+								objectFit: "cover",
+                                overflow: "hidden"
 							}}
-							onClick={handleOpen}
-						>
-							<PictureAsPdfIcon sx={{ fontSize: 60, color: "#94a3b8", mb: 1 }} />
-							<Typography sx={{ color: "#94a3b8", fontWeight: 500 }}>Dokumen PDF</Typography>
-						</Box>
+						/>
 					) : (
 						<img
-							className="certificate-image"
+							className="certificate-media"
 							src={ImgSertif}
 							alt="Certificate"
 							style={{
@@ -86,7 +81,6 @@ const Certificate = ({ ImgSertif, Link }) => {
 								transition: "filter 0.3s ease",
 								aspectRatio: "16/11.5",
 							}}
-							onClick={handleOpen}
 						/>
 					)}
 				</Box>
@@ -114,26 +108,11 @@ const Certificate = ({ ImgSertif, Link }) => {
 				</Box>
 			</Box>
 
-			{/* Modal hanya dirender jika BUKAN PDF */}
+			{/* Modal pop-up hanya untuk gambar */}
 			{!isPdf && (
-				<Modal
-					open={open}
-					onClose={handleClose}
-					BackdropComponent={Backdrop}
-					BackdropProps={{
-						timeout: 300,
-						sx: { backgroundColor: "rgba(0, 0, 0, 0.9)", backdropFilter: "blur(5px)" },
-					}}
-					sx={{ display: "flex", alignItems: "center", justifyContent: "center", margin: 0, padding: 0 }}>
+				<Modal open={open} onClose={handleClose} BackdropComponent={Backdrop} BackdropProps={{ timeout: 300, sx: { backgroundColor: "rgba(0, 0, 0, 0.9)", backdropFilter: "blur(5px)" } }} sx={{ display: "flex", alignItems: "center", justifyContent: "center", margin: 0, padding: 0 }}>
 					<Box sx={{ position: "relative", width: "auto", maxWidth: "90vw", maxHeight: "90vh", outline: "none" }}>
-						<IconButton
-							onClick={handleClose}
-							sx={{
-								position: "absolute", right: 16, top: 16, color: "white",
-								bgcolor: "rgba(0,0,0,0.6)", zIndex: 1, padding: 1,
-								"&:hover": { bgcolor: "rgba(0,0,0,0.8)", transform: "scale(1.1)" },
-							}}
-							size="large">
+						<IconButton onClick={handleClose} sx={{ position: "absolute", right: 16, top: 16, color: "white", bgcolor: "rgba(0,0,0,0.6)", zIndex: 1, padding: 1, "&:hover": { bgcolor: "rgba(0,0,0,0.8)", transform: "scale(1.1)" } }} size="large">
 							<CloseIcon sx={{ fontSize: 24 }} />
 						</IconButton>
 						<img src={ImgSertif} alt="Certificate Full View" style={{ display: "block", maxWidth: "100%", maxHeight: "90vh", margin: "0 auto", objectFit: "contain" }} />
