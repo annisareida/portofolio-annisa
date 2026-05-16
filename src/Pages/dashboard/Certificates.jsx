@@ -23,7 +23,8 @@ const SkeletonCard = () => (
 const CertCard = ({ cert, onDelete }) => {
   const [imgLoaded, setImgLoaded] = useState(false)
   
-  const certUrl = cert.Img || cert.img; 
+  // Deteksi apakah URL ini adalah PDF
+  const certUrl = cert.Img || cert.img; // Menangani perbedaan huruf besar/kecil dari database
   const isPdf = certUrl?.toLowerCase().includes('.pdf');
 
   return (
@@ -31,18 +32,17 @@ const CertCard = ({ cert, onDelete }) => {
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-2xl blur opacity-10 group-hover:opacity-30 transition duration-500" />
       <div className="relative bg-white/5 border border-white/12 rounded-2xl overflow-hidden h-full flex flex-col">
         
-        {/* Preview Iframe untuk PDF, Img untuk gambar */}
+        {/* Tampilan berdasarkan tipe file */}
         {isPdf ? (
-          <iframe
-              /* Tambahkan &view=FitH di akhir URL */
-              src={`${certUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-              title="PDF Preview"
-              className="w-full aspect-[16/11.5] border-none pointer-events-none group-hover:scale-105 transition-transform duration-500 bg-white/5"
-              style={{ overflow: "hidden" }}
-            />
-          ) : (
+          <div className="w-full aspect-[16/11.5] flex flex-col items-center justify-center bg-white/5 group-hover:scale-105 transition-transform duration-500">
+            <FileText className="w-12 h-12 text-indigo-400 mb-2" />
+            <span className="text-sm font-medium text-gray-300">PDF Document</span>
+          </div>
+        ) : (
           <>
-            {!imgLoaded && <div className="w-full aspect-[16/11.5] bg-white/5 animate-pulse" />}
+            {!imgLoaded && (
+              <div className="w-full aspect-[16/11.5] bg-white/5 animate-pulse" />
+            )}
             <img
               src={certUrl}
               alt="Certificate"
@@ -61,7 +61,7 @@ const CertCard = ({ cert, onDelete }) => {
               rel="noopener noreferrer"
               className="flex items-center justify-center py-1.5 rounded-lg bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-xs w-full hover:bg-indigo-500/30 transition-colors"
             >
-              Buka PDF
+              Lihat PDF
             </a>
           )}
           <button
@@ -173,19 +173,13 @@ export default function Certificates() {
             }`}
           >
             {preview ? (
-              (file?.type === 'application/pdf' || file?.name?.toLowerCase().endsWith('.pdf')) ? (
-                /* Perbaikan: Buang w-full dan object-contain, ganti dengan aspect ratio pasti */
-                <div className="flex justify-center w-full py-2">
-                  <iframe 
-                    src={`${preview}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`} 
-                    className="h-40 aspect-[16/11.5] rounded-lg pointer-events-none border-none bg-white/5" 
-                    title="Upload Preview" 
-                  />
+              // Jika PDF, tampilkan icon dokumen. Jika gambar, tampilkan gambar.
+              file?.type === 'application/pdf' ? (
+                <div className="text-center space-y-2 p-6">
+                  <FileText className="w-12 h-12 text-indigo-400 mx-auto" />
+                  <p className="text-sm text-gray-300 truncate max-w-[200px]">{file.name}</p>
                 </div>
               ) : (
-                <img src={preview} alt="preview" className="max-h-40 object-contain rounded-lg p-2" />
-              )
-            ) : (
                 <img src={preview} alt="preview" className="max-h-40 object-contain rounded-lg p-2" />
               )
             ) : (
