@@ -34,12 +34,13 @@ const CertCard = ({ cert, onDelete }) => {
         {/* Preview Iframe untuk PDF, Img untuk gambar */}
         {isPdf ? (
           <iframe
-            src={`${certUrl}#toolbar=0&navpanes=0&scrollbar=0`}
-            title="PDF Preview"
-            className="w-full aspect-[16/11.5] border-none pointer-events-none group-hover:scale-105 transition-transform duration-500 bg-white/5"
-            style={{ overflow: "hidden" }}
-          />
-        ) : (
+              /* Tambahkan &view=FitH di akhir URL */
+              src={`${certUrl}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+              title="PDF Preview"
+              className="w-full aspect-[16/11.5] border-none pointer-events-none group-hover:scale-105 transition-transform duration-500 bg-white/5"
+              style={{ overflow: "hidden" }}
+            />
+          ) : (
           <>
             {!imgLoaded && <div className="w-full aspect-[16/11.5] bg-white/5 animate-pulse" />}
             <img
@@ -173,11 +174,14 @@ export default function Certificates() {
           >
             {preview ? (
               (file?.type === 'application/pdf' || file?.name?.toLowerCase().endsWith('.pdf')) ? (
-                <iframe 
-                  src={`${preview}#toolbar=0&navpanes=0&scrollbar=0`} 
-                  className="max-h-40 w-full object-contain rounded-lg p-2 pointer-events-none border-none" 
-                  title="Upload Preview" 
-                />
+                /* Perbaikan: Buang w-full dan object-contain, ganti dengan aspect ratio pasti */
+                <div className="flex justify-center w-full py-2">
+                  <iframe 
+                    src={`${preview}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`} 
+                    className="h-40 aspect-[16/11.5] rounded-lg pointer-events-none border-none bg-white/5" 
+                    title="Upload Preview" 
+                  />
+                </div>
               ) : (
                 <img src={preview} alt="preview" className="max-h-40 object-contain rounded-lg p-2" />
               )
