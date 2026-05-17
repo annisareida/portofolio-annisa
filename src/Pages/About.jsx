@@ -218,7 +218,7 @@ const AboutPage = () => {
               data-aos="fade-right"
               data-aos-duration="1500"
             >
-        An Informatics Engineering graduate with a focus on Artificial Intelligence, Machine Learning, and Data Science. 
+        an Informatics Engineering graduate with a focus on Artificial Intelligence, Machine Learning, and Data Science. 
         I specialize in developing predictive analytics models and interactive data visualizations to deliver strategic and data-driven solutions in every research and project I undertake.                  </p>
 
                {/* Quote Section */}
