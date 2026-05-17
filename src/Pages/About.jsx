@@ -218,9 +218,8 @@ const AboutPage = () => {
               data-aos="fade-right"
               data-aos-duration="1500"
             >
-        Saya adalah lulusan Teknik Informatika yang berfokus pada bidang Artificial Intelligence, Machine Learning, dan Data Science.
-        Saya berfokus pada pengembangan model analitik prediktif dan visualisasi data interaktif untuk menghadirkan solusi strategis dan berbasis data dalam setiap penelitian maupun proyek yang saya kerjakan.
-                  </p>
+        An Informatics Engineering graduate with a focus on Artificial Intelligence, Machine Learning, and Data Science. 
+        I specialize in developing predictive analytics models and interactive data visualizations to deliver strategic and data-driven solutions in every research and project I undertake.                  </p>
 
                {/* Quote Section */}
       <div 
