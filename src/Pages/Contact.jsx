@@ -45,7 +45,7 @@ const ContactPage = () => {
 
     try {
       // Ganti dengan email Anda di FormSubmit
-      const formSubmitUrl = 'https://formsubmit.co/annisaheyy@gmail.com';
+      const formSubmitUrl = 'https://formspree.io/f/mgoqwrda';
       
       // Siapkan data form untuk FormSubmit
       const submitData = new FormData();
