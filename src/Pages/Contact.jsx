@@ -44,25 +44,24 @@ const ContactPage = () => {
     });
 
     try {
-      // Ganti dengan email Anda di FormSubmit
-      const formSubmitUrl = 'https://formspree.io/f/mgoqwrda';
+      // PASTIKAN URL INI BENAR (Contoh pakai Formspree)
+      const formSubmitUrl = 'https://formspree.io/f/mgoqwrda'; 
       
-      // Siapkan data form untuk FormSubmit
       const submitData = new FormData();
       submitData.append('name', formData.name);
       submitData.append('email', formData.email);
       submitData.append('message', formData.message);
       submitData.append('_subject', 'Pesan Baru dari Website Portfolio');
-      submitData.append('_captcha', 'false'); // Nonaktifkan captcha
-      submitData.append('_template', 'table'); // Format email sebagai tabel
+      submitData.append('_captcha', 'false'); 
 
+      // PENGATURAN AXIOS YANG DIPERBAIKI
       await axios.post(formSubmitUrl, submitData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json', // INI SANGAT PENTING
         },
       });
 
-     
+      // Jika sukses, munculkan notifikasi ini
       Swal.fire({
         title: 'Berhasil!',
         text: 'Pesan Anda telah berhasil terkirim!',
@@ -72,6 +71,7 @@ const ContactPage = () => {
         timerProgressBar: true
       });
 
+      // Reset form
       setFormData({
         name: "",
         email: "",
@@ -79,29 +79,15 @@ const ContactPage = () => {
       });
 
     } catch (error) {
-      if (error.request && error.request.status === 0) {
-        Swal.fire({
-          title: 'Berhasil!',
-          text: 'Pesan Anda telah berhasil terkirim!',
-          icon: 'success',
-          confirmButtonColor: '#6366f1',
-          timer: 2000,
-          timerProgressBar: true
-        });
-
-        setFormData({
-          name: "",
-          email: "",
-          message: "",
-        });
-      } else {
-        Swal.fire({
-          title: 'Gagal!',
-          text: 'Terjadi kesalahan. Silakan coba lagi nanti.',
-          icon: 'error',
-          confirmButtonColor: '#6366f1'
-        });
-      }
+      // Jika gagal, pastikan muncul notifikasi GAGAL, bukan berhasil
+      console.error("Error Detail:", error); // Untuk cek error di inspect element
+      
+      Swal.fire({
+        title: 'Gagal Mengirim!',
+        text: 'Periksa koneksi internet Anda atau coba lagi nanti.',
+        icon: 'error',
+        confirmButtonColor: '#6366f1'
+      });
     } finally {
       setIsSubmitting(false);
     }
