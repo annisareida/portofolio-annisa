@@ -188,7 +188,7 @@ const Home = () => {
                   <p className="text-base md:text-lg text-gray-400 max-w-xl leading-relaxed font-light"
                     data-aos="fade-up"
                     data-aos-delay="1000">
-                    Membangun Model Machine Learning dan Produk Data (Dashboard Interaktif) yang Akurat dan Inovatif untuk Mendukung Keputusan Berbasis Data.
+                    Membangun model machine learning dan dashboard interaktif yang akurat dan inovatif untuk mendukung pengambilan keputusan berbasis data.
                   </p>
 
                   {/* Tech Stack */}
